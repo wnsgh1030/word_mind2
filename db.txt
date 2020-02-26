@@ -1,0 +1,37 @@
+CREATE TABLE `subjects` (
+   `s_no` int unsigned NOT NULL AUTO_INCREMENT,
+   `s_name` varchar NOT NULL,
+   PRIMARY KEY (`s_no`)
+ ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+CREATE TABLE `words` (
+   `w_no` int unsigned NOT NULL AUTO_INCREMENT,
+   `w_name` varchar NOT NULL,
+   `w_definition` varchar NOT NULL,
+   `w_character` varchar NOT NULL,
+   `s_no` int unsigned NOT NULL,
+   PRIMARY KEY (`w_no`),
+   KEY `s_no` (`s_no`),
+   CONSTRAINT `words_ibfk_1` FOREIGN KEY (`s_no`) REFERENCES `subjects` (`s_no`) ON DELETE CASCADE ON UPDATE CASCADE
+ ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+CREATE TABLE `relationship` (
+   `w1_no` int(11) unsigned NOT NULL,
+   `w2_no` int(11) unsigned NOT NULL,
+   `description` varchar(200) NOT NULL,
+   PRIMARY KEY (`w1_no`,`w2_no`),
+   KEY `w2_no` (`w2_no`),
+   CONSTRAINT `relationship_ibfk_1` FOREIGN KEY (`w1_no`) REFERENCES `words` (`w_no`) ON DELETE CASCADE ON UPDATE CASCADE,
+   CONSTRAINT `relationship_ibfk_2` FOREIGN KEY (`w2_no`) REFERENCES `words` (`w_no`) ON DELETE CASCADE ON UPDATE CASCADE
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+
+CREATE TABLE `examples` (
+   `e_no` int unsigned NOT NULL AUTO_INCREMENT,
+   `e_name` varchar NOT NULL,
+   `e_content` varchar NOT NULL,
+   `w_no` int unsigned NOT NULL,
+   PRIMARY KEY (`w_no`),
+   KEY `w_no` (`w_no`),
+   CONSTRAINT `examples_ibfk_1` FOREIGN KEY (`w_no`) REFERENCES `words` (`w_no`) ON DELETE CASCADE ON UPDATE CASCADE
+ ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
