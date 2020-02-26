@@ -9,6 +9,7 @@ router.get('/create-form', function (req, res, next) {
             console.log(err);
         }
         connection.query('SELECT * FROM subjects WHERE s_no = ?; SELECT * FROM words WHERE s_no = ?;', [req.query.s_no, req.query.s_no], (err, result) => {
+            connection.release();
             if (err) {
                 console.log(err);
             }
@@ -67,7 +68,6 @@ router.post('/create-process', function (req, res, next) {
 });
 
 router.get('/update-form', function (req, res, next) {
-    console.log(req.query)
     db.getConnection((err, connection) => {
         if (err) {
             console.log(err);
@@ -77,15 +77,16 @@ router.get('/update-form', function (req, res, next) {
                 console.log(err);
             }
             else {
-                var s_name = result[0]
-                var words = result[1]
+                var s_name = result[0];
+                var words = result[1];
                 connection.query('SELECT * FROM words WHERE w_no = ?; SELECT * FROM relationship WHERE w1_no = ?', [req.query.w_no, req.query.w_no, req.query.w_no], (err, result2) => {
+                    connection.release();
                     if (err) {
                         console.log(err);
                     }
                     else {
                         var word = result2[0];
-                        var relation = result2[1]
+                        var relation = result2[1];
                         var body = template.update_words_body(s_name, word, words, relation);
                         var html = template.words_HTML(body);
                         res.send(html);
@@ -169,7 +170,7 @@ router.get('/:w_no', function (req, res, next) {
         connection.query('SELECT * FROM words WHERE w_no = ? ; SELECT w_name, description FROM relationship, words WHERE w1_no = ? AND w2_no = w_no; SELECT * FROM examples WHERE w_no = ?', 
         [req.params.w_no, req.params.w_no, req.params.w_no, req.params.w_no], (err, result) => {
             if (err) {
-                console.log(err)
+                console.log(err);
             }
             else {
                 var body = template.words_body(result[0], result[1], result[2]);

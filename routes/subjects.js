@@ -15,6 +15,7 @@ router.post('/create-process', function (req, res, next) {
             console.log(err);
         }
         connection.query('INSERT INTO subjects SET ?', req.body, (err, result) => {
+            connection.release();
             if (err) {
                 console.log(err);
             }
@@ -51,15 +52,15 @@ router.get('/:s_no', function (req, res, next) {
                             var examples = result[0].filter(function (item) {
                                 return item.w_no == words[i].w_no;
                             })
-                            word.examples = examples
+                            word.examples = examples;
                             words_examples.push(word);
-                            i = i + 1 
+                            i = i + 1
                         }
                         var body = template.subjects_body(subjects, words_examples, subject);
                         var style = template.subjects_style();
                         var html = template.subjects_HTML(body, style);
                         res.send(html);
-                       
+
                     }
                 })
             }
@@ -79,7 +80,7 @@ router.get('/update-form/:s_no', function (req, res, next) {
             else {
                 var body = template.update_subjects_body(subject);
                 var style = template.create_update_subjects_style();
-                var html = template.subjects_HTML(body,style);
+                var html = template.subjects_HTML(body, style);
                 res.send(html);
             }
         })

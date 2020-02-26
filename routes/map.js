@@ -20,8 +20,8 @@ router.get('/:s_no', function (req, res, next) {
                 var wordlist = [];
                 var i = 0;
                 while(i < words.length){
-                    wordlist.push(words[i].w_no)
-                    i = i + 1
+                    wordlist.push(words[i].w_no);
+                    i = i + 1;
                 }
                 if(wordlist.length == 0) {
                     var body = template.map_body(subject, words, examples, []);

@@ -122,7 +122,7 @@ exports.map_body = (subject, words, examples, relationship) => {
       data.push(edge);
       i = i + 1;
     }
-    i = 0
+    i = 0;
     while(i < examples.length){
       var word = {data: {id: `example${examples[i].e_no}`, label: examples[i].e_name, type: 'examples'}};
       var edge = {data: {id: `word${examples[i].w_no}_example${examples[i].e_no}`, label: '', source: `word${examples[i].w_no}`, target: `example${examples[i].e_no}`, type: 'word-example'}};
@@ -130,11 +130,11 @@ exports.map_body = (subject, words, examples, relationship) => {
       data.push(edge);
       i = i + 1;
     }
-    i = 0
+    i = 0;
     while(i < relationship.length){
       var edge = {data:{id: `word${relationship[i].w1_no}_word${relationship[i].w2_no}`, label: `${relationship[i].description}`, source: `word${relationship[i].w1_no}`, target: `word${relationship[i].w2_no}`, type: 'word-word'}};
       data.push(edge);
       i = i + 1;
     }
-    return data
+    return data;
 }

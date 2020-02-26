@@ -55,7 +55,7 @@ exports.create_words_body = (result, words) => {
     <div id="pre_set" style="display:none"><select name="w2_no">`;
     var i = 0;
     while (i < words.length && words != undefined) {
-        body = body + `<option value="${words[i].w_no}">${words[i].w_name}</option>`
+        body = body + `<option value="${words[i].w_no}">${words[i].w_name}</option>`;
         i = i + 1;
     }
     body = body +
@@ -66,13 +66,13 @@ exports.create_words_body = (result, words) => {
         <td><button class="word_button" type="submit" id="create_button"><i class="fas fa-plus"></i>생성</button></td></form>
        <td><a href="/subjects/${result[0].s_no}"><button class="word_button" type="button" class="back_button"><i class="fas fa-arrow-left"></i>뒤로가기</button></a></td>
     </tr>
-    </tbody></table>`
+    </tbody></table>`;
     return body;
 }
 exports.update_words_body = (s_name, word, words, relation) => {
 
     var i = 0;
-    var select = ''
+    var select = '';
     while (i < words.length) {
         select = select + `<option value="${words[i].w_no}">${words[i].w_name}</option>`
         i = i + 1;
@@ -114,7 +114,7 @@ exports.update_words_body = (s_name, word, words, relation) => {
             }
             i = i + 1;
         }
-        relationship = relationship + `<input type="text" name="description" value="${relation[j].description}" ><button class="word_button" type="button" id="remove" onclick="remove_item(this)"><i class="fas fa-minus-circle"></i>삭제</button></div>`
+        relationship = relationship + `<input type="text" name="description" value="${relation[j].description}" ><button class="word_button" type="button" id="remove" onclick="remove_item(this)"><i class="fas fa-minus-circle"></i>삭제</button></div>`;
         j = j + 1;
         body = body + relationship;
     }
@@ -145,7 +145,7 @@ exports.words_body = (words, relation, examples) => {
             body = body + relationship;
         }
     }
-    i = 0
+    i = 0;
     var example = `<table class="create_table"><thead><tr><td>예시 단어</td><td>예시 내용</td></tr></thead>`;
     while(i < examples.length){
         example = example + ` <tbody><tr><td>${examples[i].e_name}</td><td>${examples[i].e_content}</td></tr>`;
@@ -231,8 +231,5 @@ exports.words_style = () => {
         background-color: #4B89DC;
         box-shadow: 0px 15px 20px #4B89DC;
         transform: translateY(-10px);
-    }
-    
-
-    `
+    }`;
 }
