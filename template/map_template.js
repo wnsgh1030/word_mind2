@@ -20,7 +20,7 @@ exports.map_HTML = (body) => {
       <div id="cy"></div>
       <script>
         const data = ${JSON.stringify(body)}
-        var cy = cytoscape({
+        const cy = cytoscape({
     
           container: document.getElementById('cy'), // container to render in
     
@@ -110,29 +110,29 @@ exports.map_HTML = (body) => {
     </html>`;
 }
 exports.map_body = (subject, words, examples, relationship) => {
-    var data = new Array();
-    var subject = { data: { id: 'subject', label: subject[0].s_name, type: 'subject' } };
-    data.push(subject);
+    let data = new Array();
+    const subjects = { data: { id: 'subject', label: subject[0].s_name, type: 'subject' } };
+    data.push(subjects);
 
-    var i = 0;
+    let i = 0;
     while (i < words.length){
-      var content = {data: {id: `word${words[i].w_no}`, label: words[i].w_name, type: 'words', url: `/words/${words[i].w_no}`}};
-      var edge = {data: {id: `subject_word${words[i].w_no}`, label: '', source: 'subject', target: `word${words[i].w_no}`, type: 'subject-word'}};
+      let content = {data: {id: `word${words[i].w_no}`, label: words[i].w_name, type: 'words', url: `/words/${words[i].w_no}`}};
+      let edge = {data: {id: `subject_word${words[i].w_no}`, label: '', source: 'subject', target: `word${words[i].w_no}`, type: 'subject-word'}};
       data.push(content);
       data.push(edge);
       i = i + 1;
     }
     i = 0;
     while(i < examples.length){
-      var word = {data: {id: `example${examples[i].e_no}`, label: examples[i].e_name, type: 'examples'}};
-      var edge = {data: {id: `word${examples[i].w_no}_example${examples[i].e_no}`, label: '', source: `word${examples[i].w_no}`, target: `example${examples[i].e_no}`, type: 'word-example'}};
+      let word = {data: {id: `example${examples[i].e_no}`, label: examples[i].e_name, type: 'examples'}};
+      let edge = {data: {id: `word${examples[i].w_no}_example${examples[i].e_no}`, label: '', source: `word${examples[i].w_no}`, target: `example${examples[i].e_no}`, type: 'word-example'}};
       data.push(word);
       data.push(edge);
       i = i + 1;
     }
     i = 0;
     while(i < relationship.length){
-      var edge = {data:{id: `word${relationship[i].w1_no}_word${relationship[i].w2_no}`, label: `${relationship[i].description}`, source: `word${relationship[i].w1_no}`, target: `word${relationship[i].w2_no}`, type: 'word-word'}};
+      let edge = {data:{id: `word${relationship[i].w1_no}_word${relationship[i].w2_no}`, label: `${relationship[i].description}`, source: `word${relationship[i].w1_no}`, target: `word${relationship[i].w2_no}`, type: 'word-word'}};
       data.push(edge);
       i = i + 1;
     }

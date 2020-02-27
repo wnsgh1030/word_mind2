@@ -1,7 +1,7 @@
-var express = require('express');
-var router = express.Router();
-var template = require('../template/examples_template');
-var db = require('../lib/db');
+const express = require('express');
+const router = express.Router();
+const template = require('../template/examples_template');
+const db = require('../lib/db');
 
 router.get('/create-form', function (req, res, next) {
     db.getConnection((err, connection) => {
@@ -14,8 +14,8 @@ router.get('/create-form', function (req, res, next) {
                 console.log(err);
             }
             else{
-                var body = template.create_examples_body(word);
-                var html = template.examples_HTML(body);
+                const body = template.create_examples_body(word);
+                const html = template.examples_HTML(body);
                 res.send(html);
             }
         })
@@ -23,7 +23,7 @@ router.get('/create-form', function (req, res, next) {
 });
 
 router.post('/create-process', function (req, res, next) {
-    var s_no = req.body.s_no;
+    const s_no = req.body.s_no;
     delete req.body.s_no;
     db.getConnection((err, connection) => {
         if(err){
@@ -53,15 +53,15 @@ router.get('/update-form', function (req, res, next) {
                 console.log(err);
             }
             else{
-                var body = template.update_examples_body(example, req.query.s_no);
-                var html = template.examples_HTML(body);
+                const body = template.update_examples_body(example, req.query.s_no);
+                const html = template.examples_HTML(body);
                 res.send(html);
             }
         })
     })    
 });
 router.post('/update-process', function (req, res, next) {
-    var s_no = req.body.s_no;
+    const s_no = req.body.s_no;
     delete req.body.s_no;
     db.getConnection((err, connection) => {
         if(err){

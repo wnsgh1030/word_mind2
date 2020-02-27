@@ -1,7 +1,7 @@
-var express = require('express');
-var router = express.Router();
-var template = require('../template/home_template')
-var db = require('../lib/db')
+const express = require('express');
+const router = express.Router();
+const template = require('../template/home_template')
+const db = require('../lib/db')
 /* GET home page. */
 router.get('/', function(req, res, next) {
   db.getConnection((err, connection) => {

@@ -9,7 +9,7 @@ exports.words_HTML = (body) => {
             <script language="javascript">
             <!--
                 function add_item(){
-                    var div = document.createElement('div');
+                    const div = document.createElement('div');
                     div.innerHTML = document.getElementById('pre_set').innerHTML;
                     document.getElementById('relationfield').appendChild(div);
                 }
@@ -31,7 +31,7 @@ exports.words_HTML = (body) => {
         </html>`;
 }
 exports.create_words_body = (result, words) => {
-    var body = `
+    let body = `
     <form autocomplete="off" action="/words/create-process" method="post"><table id="create_table">
     <tbody>
     <tr>
@@ -53,7 +53,7 @@ exports.create_words_body = (result, words) => {
     <tr><td>단어 관계</td><td><button class="word_button" type="button" onclick="add_item()"><i class="fas fa-plus-circle"></i>추가</button></td>
     <tr><td colspan="3"><div id="relationfield"></div></td></tr>
     <div id="pre_set" style="display:none"><select name="w2_no">`;
-    var i = 0;
+    let i = 0;
     while (i < words.length && words != undefined) {
         body = body + `<option value="${words[i].w_no}">${words[i].w_name}</option>`;
         i = i + 1;
@@ -71,14 +71,14 @@ exports.create_words_body = (result, words) => {
 }
 exports.update_words_body = (s_name, word, words, relation) => {
 
-    var i = 0;
-    var select = '';
+    let i = 0;
+    let select = '';
     while (i < words.length) {
         select = select + `<option value="${words[i].w_no}">${words[i].w_name}</option>`
         i = i + 1;
     }
     select = select + `</select>`;
-    var body = `
+    let body = `
     <form autocomplete="off" action="/words/update-process" method="post"><table id="update_table">
     <tbody>
     <tr>
@@ -100,10 +100,10 @@ exports.update_words_body = (s_name, word, words, relation) => {
     <tr><td>단어 관계</td><td><button class="word_button" type="button" onclick="add_item()"><i class="fas fa-plus-circle"></i>추가</button></td>
     <tr><td colspan="3"><div id="relationfield">`
 
-    var j = 0;
+    let j = 0;
     while(j < relation.length){
-        var relationship = '<div><select name="w2_no">';
-        var i = 0;
+        let relationship = '<div><select name="w2_no">';
+        let i = 0;
         while(i < words.length){
             if(relation[j].w2_no == words[i].w_no){
                 relationship = relationship +`<option value="${words[i].w_no}" selected="selected">${words[i].w_name}</option>`;
@@ -132,11 +132,11 @@ exports.update_words_body = (s_name, word, words, relation) => {
 }
 
 exports.words_body = (words, relation, examples) => {
-    var body = `<table class="create_table"><thead>
+    let body = `<table class="create_table"><thead>
     <tr><td>단어 이름</td><td>정의</td><td>특징</td></tr></thead>
     <tbody><tr><td>${words[0].w_name}</td><td>${words[0].w_definition}</td><td>${words[0].w_character}</td></tr></tbody></table>`;
-    var i = 0;
-    var relationship = `<table class="create_table"><thead><tr><td>연관 단어</td><td>연관 내용</td></tr></thead>`;
+    let i = 0;
+    let relationship = `<table class="create_table"><thead><tr><td>연관 단어</td><td>연관 내용</td></tr></thead>`;
     while (i < relation.length){
         relationship = relationship + `<tbody><tr><td>${relation[i].w_name}</td><td>${relation[i].description}</td></tr>`;
         i = i + 1;
@@ -146,7 +146,7 @@ exports.words_body = (words, relation, examples) => {
         }
     }
     i = 0;
-    var example = `<table class="create_table"><thead><tr><td>예시 단어</td><td>예시 내용</td></tr></thead>`;
+    let example = `<table class="create_table"><thead><tr><td>예시 단어</td><td>예시 내용</td></tr></thead>`;
     while(i < examples.length){
         example = example + ` <tbody><tr><td>${examples[i].e_name}</td><td>${examples[i].e_content}</td></tr>`;
         i = i + 1;

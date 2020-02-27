@@ -1,7 +1,7 @@
-var express = require('express');
-var router = express.Router();
-var template = require('../template/map_template');
-var db = require('../lib/db');
+const express = require('express');
+const router = express.Router();
+const template = require('../template/map_template');
+const db = require('../lib/db');
 
 router.get('/:s_no', function (req, res, next) {
     db.getConnection((err, conncetion) => {
@@ -14,11 +14,11 @@ router.get('/:s_no', function (req, res, next) {
                 console.log(err);
             }
             else {
-                var subject = result[0];
-                var words = result[1];
-                var examples = result[2];
-                var wordlist = [];
-                var i = 0;
+                const subject = result[0];
+                const words = result[1];
+                const examples = result[2];
+                let wordlist = [];
+                let i = 0;
                 while(i < words.length){
                     wordlist.push(words[i].w_no);
                     i = i + 1;
